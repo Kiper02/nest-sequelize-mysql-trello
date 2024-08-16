@@ -14,6 +14,7 @@ import { CommentsModule } from './comments/comments.module';
 import { Columns } from "./columns/columns.model";
 import { Card } from "./cards/cards.model";
 import { Comment } from "./comments/comments.model";
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   controllers: [],
@@ -38,6 +39,7 @@ import { Comment } from "./comments/comments.model";
     ColumnsModule,
     CardsModule,
     CommentsModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

@@ -1,11 +1,13 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Card } from 'src/cards/cards.model';
 import { ColumnsService } from 'src/columns/columns.service';
 import { CreateCommentDto } from './dto/create-comments-dto';
 import { CommentsService } from './comments.service';
 import { Comment } from './comments.model';
 
+
+@ApiTags('Комментарии')
 @Controller('comments')
 export class CommentsController {
 
