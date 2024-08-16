@@ -12,10 +12,12 @@ import { CardsService } from './cards/cards.service';
 import { CardsModule } from './cards/cards.module';
 import { CommentsModule } from './comments/comments.module';
 import { Columns } from "./columns/columns.model";
+import { Card } from "./cards/cards.model";
+import { Comment } from "./comments/comments.model";
 
 @Module({
-  controllers: [CardsController],
-  providers: [CardsService],
+  controllers: [],
+  providers: [],
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
@@ -27,9 +29,9 @@ import { Columns } from "./columns/columns.model";
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      models: [User, Role, UserRoles, Columns],
+      models: [User, Role, UserRoles, Columns, Card, Comment],
       autoLoadModels: true,
-      //   sync: {force: true}
+        // sync: {force: true}
     }),
     UsersModule,
     RolesModule,
@@ -39,3 +41,4 @@ import { Columns } from "./columns/columns.model";
   ],
 })
 export class AppModule {}
+ 

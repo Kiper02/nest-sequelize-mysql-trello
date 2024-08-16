@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsToMany, Model } from "sequelize-typescript";
+import { BelongsToMany, HasMany, Model } from "sequelize-typescript";
 import { Column, DataType, Table } from "sequelize-typescript";
+import { Columns } from "src/columns/columns.model";
 import { Role } from "src/roles/roles.model";
 import { UserRoles } from "src/roles/user-roles.models";
 
@@ -31,4 +32,7 @@ export class User extends Model<User, UserCreationAttrs>{
 
   @BelongsToMany(() => Role, () => UserRoles)
   roles: Role[];
+
+  @HasMany(() => Columns, {foreignKey: 'user_id'})
+  columns: Columns[]
 }
