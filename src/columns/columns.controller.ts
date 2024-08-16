@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ColumnsService } from './columns.service';
 import { Column } from 'sequelize-typescript';
@@ -14,6 +14,7 @@ export class ColumnsController {
     constructor(private columnsService: ColumnsService) {}
 
     @ApiOperation({summary: 'Создание колонки'})
+    @UsePipes(ValidationPipe)
     @ApiResponse({status: 200, type: Column})
     @UseGuards(JwtAuthGuard)
     @Post()

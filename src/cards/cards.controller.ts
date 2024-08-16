@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CardsService } from './cards.service';
 import { Card } from './cards.model';
@@ -13,6 +13,7 @@ export class CardsController {
     constructor(private cardsService: CardsService) {}
 
     @ApiOperation({summary: 'Создание карточки'})
+    @UsePipes(ValidationPipe)
     @ApiResponse({status: 200, type: Card})
     @UseGuards(JwtAuthGuard)
     @Post()
@@ -29,6 +30,7 @@ export class CardsController {
     }
 
     @ApiOperation({summary: 'Получени карточек'})
+    @UsePipes(ValidationPipe)
     @ApiResponse({status: 200, type: [Card]})
     @UseGuards(JwtAuthGuard)
     @Get()

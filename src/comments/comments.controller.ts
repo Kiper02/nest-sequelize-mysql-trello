@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Card } from 'src/cards/cards.model';
 import { ColumnsService } from 'src/columns/columns.service';
@@ -15,6 +15,7 @@ export class CommentsController {
     constructor(private commentsService: CommentsService) {}
 
     @ApiOperation({summary: 'Создание комментария'})
+    @UsePipes(ValidationPipe)
     @ApiResponse({status: 200, type: Card})
     @UseGuards(JwtAuthGuard)
     @Post()
@@ -23,6 +24,7 @@ export class CommentsController {
     }
 
     @ApiOperation({summary: 'Получение комментария'})
+    @UsePipes(ValidationPipe)
     @ApiResponse({status: 200, type: [Comment]})
     @UseGuards(JwtAuthGuard)
     @Get()
