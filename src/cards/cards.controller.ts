@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CardsService } from './cards.service';
 import { Card } from './cards.model';
 import { CreateCardDto } from './dto/create-card-dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 
 @ApiTags('Карточки')
@@ -13,6 +14,7 @@ export class CardsController {
 
     @ApiOperation({summary: 'Создание карточки'})
     @ApiResponse({status: 200, type: Card})
+    @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() cardDto: CreateCardDto) {
         return this.cardsService.create(cardDto)
@@ -20,6 +22,7 @@ export class CardsController {
 
     @ApiOperation({summary: 'Получени карточек'})
     @ApiResponse({status: 200, type: [Card]})
+    @UseGuards(JwtAuthGuard)
     @Get()
     getAll() {
         return this.cardsService.getAll();
@@ -27,6 +30,7 @@ export class CardsController {
 
     @ApiOperation({summary: 'Получени карточек'})
     @ApiResponse({status: 200, type: [Card]})
+    @UseGuards(JwtAuthGuard)
     @Get()
     getCardsToColumn(@Body() cardDto: CreateCardDto) {
         return this.cardsService.getAlltoColumn(cardDto.id);

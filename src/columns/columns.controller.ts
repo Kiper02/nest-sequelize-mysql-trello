@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ColumnsService } from './columns.service';
 import { Column } from 'sequelize-typescript';
 import { CreateColumnDto } from './dto/create-column-dto';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 
 
@@ -14,6 +15,7 @@ export class ColumnsController {
 
     @ApiOperation({summary: 'Создание колонки'})
     @ApiResponse({status: 200, type: Column})
+    @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() columnDto: CreateColumnDto) {
         return this.columnsService.create(columnDto)
@@ -21,6 +23,7 @@ export class ColumnsController {
 
     @ApiOperation({summary: 'Получение всех колонок'})
     @ApiResponse({status: 200, type: [Column]})
+    @UseGuards(JwtAuthGuard)
     @Get()
     getAll() {
         return this.columnsService.getAll();
@@ -28,6 +31,7 @@ export class ColumnsController {
 
     @ApiOperation({summary: 'Получение колонки'})
     @ApiResponse({status: 200, type: [Column]})
+    @UseGuards(JwtAuthGuard)
     @Get(':id')
     getOne(@Param('id') id: string) {
         return this.columnsService.getOne(id)
